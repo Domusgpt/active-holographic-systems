@@ -942,7 +942,10 @@
             constructor() {
                 this.visualizers = [];
                 this.currentVariant = 0;
-                this.totalVariants = 30;
+                this.baseVariants = 30; // Original 30 variations
+                this.customVariants = []; // Store custom variations
+                this.totalVariants = 30; // Will update dynamically
+                this.maxVariants = 50; // Maximum allowed variations
                 this.autoCycleActive = false;
                 this.autoCycleInterval = null;
                 this.mouseX = 0.5;
@@ -976,7 +979,41 @@
                     'CRYSTAL LATTICE', 'CRYSTAL FIELD', 'CRYSTAL MATRIX', 'CRYSTAL QUANTUM'
                 ];
                 
+                // Load any saved custom variations from session
+                this.loadSavedVariations();
+                
                 this.initialize();
+            }
+            
+            loadSavedVariations() {
+                try {
+                    const saved = sessionStorage.getItem('customHolographicVariations');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        this.customVariants = data.variations || [];
+                        this.totalVariants = this.baseVariants + this.customVariants.length;
+                        
+                        // Restore variant names
+                        this.customVariants.forEach(cv => {
+                            this.variantNames[cv.id] = cv.name;
+                        });
+                        
+                        console.log(`📾 Loaded ${this.customVariants.length} saved custom variations`);
+                    }
+                } catch (e) {
+                    console.error('Failed to load saved variations:', e);
+                }
+            }
+            
+            saveVariations() {
+                try {
+                    sessionStorage.setItem('customHolographicVariations', JSON.stringify({
+                        variations: this.customVariants,
+                        timestamp: Date.now()
+                    }));
+                } catch (e) {
+                    console.error('Failed to save variations:', e);
+                }
             }
             
             initialize() {
@@ -1012,12 +1049,34 @@
                 if (newVariant >= this.totalVariants) newVariant = 0;
                 
                 this.currentVariant = newVariant;
-                this.isCustomVariation = false; // Reset custom variation flag
+                
+                // Check if this is a custom variation
+                this.isCustomVariation = newVariant >= this.baseVariants;
                 
                 // Update all visualizers with new variant parameters
                 this.visualizers.forEach(visualizer => {
                     visualizer.variant = this.currentVariant;
-                    visualizer.variantParams = visualizer.generateVariantParams(this.currentVariant);
+                    
+                    // For custom variations, use stored parameters
+                    if (this.isCustomVariation) {
+                        const customIndex = this.currentVariant - this.baseVariants;
+                        const customData = this.customVariants[customIndex];
+                        if (customData) {
+                            visualizer.variantParams = {
+                                geometry: customData.params.geometry,
+                                density: customData.params.density,
+                                speed: customData.params.speed,
+                                chaos: customData.params.chaos,
+                                morph: customData.params.morph,
+                                hue: customData.params.hue,
+                                saturation: customData.params.saturation,
+                                intensity: customData.params.intensity,
+                                name: customData.name
+                            };
+                        }
+                    } else {
+                        visualizer.variantParams = visualizer.generateVariantParams(this.currentVariant);
+                    }
                     
                     // Completely regenerate role parameters with new variant values
                     const role = visualizer.role;
@@ -1062,7 +1121,8 @@
                 variantNumber.textContent = String(this.currentVariant + 1).padStart(2, '0');
                 
                 // Get the geometry name from the variant parameters
-                const geometryName = this.isCustomVariation ? this.customVariationName : 
+                const geometryName = this.isCustomVariation ? 
+                    (this.customVariants[this.currentVariant - this.baseVariants]?.name || 'CUSTOM') : 
                     (this.visualizers[0]?.variantParams?.name || this.variantNames[this.currentVariant]);
                 variantName.textContent = geometryName;
             }
@@ -1450,10 +1510,31 @@
                     highResponse: parseFloat(customParams.highResponse) || 1.0
                 };
                 
-                // Override current variant to 31 (custom)
-                this.currentVariant = 0; // Use valid variant number
-                this.isCustomVariation = true; // Flag to indicate custom mode
-                this.customVariationName = this.getGeometryName(params.geometry) + ' CUSTOM';
+                // Add as a new variation if under the limit
+                if (this.totalVariants < this.maxVariants) {
+                    const newVariantId = this.totalVariants;
+                    this.customVariants.push({
+                        id: newVariantId,
+                        params: params,
+                        name: this.getGeometryName(params.geometry) + ' CUSTOM ' + (this.customVariants.length + 1)
+                    });
+                    this.totalVariants++;
+                    this.currentVariant = newVariantId;
+                    this.isCustomVariation = true;
+                    this.customVariationName = this.customVariants[this.customVariants.length - 1].name;
+                    
+                    // Add to variant names array
+                    this.variantNames[newVariantId] = this.customVariationName;
+                    
+                    // Save variations to session storage
+                    this.saveVariations();
+                    
+                    console.log(`✅ Added custom variation #${newVariantId}: ${this.customVariationName}`);
+                } else {
+                    console.warn('⚠️ Maximum variations limit reached (50)');
+                    alert('Maximum 50 variations allowed. Please export your current set.');
+                    return;
+                }
                 
                 // Update all visualizers with custom parameters
                 this.visualizers.forEach(visualizer => {
