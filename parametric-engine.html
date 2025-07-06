@@ -895,7 +895,18 @@
                 });
                 
                 const url = `index.html?${params.toString()}&autoplay=true`;
-                console.log('🚀 Launching with URL:', url);\n                console.log('📊 Current params:', this.currentParams);\n                console.log('🔧 URL length:', url.length);\n                \n                // Try both window.open and direct navigation for testing\n                const newWindow = window.open(url, '_blank');\n                if (!newWindow) {\n                    console.log('⚠️ Popup blocked! Trying same window...');\n                    window.location.href = url;\n                } else {\n                    console.log('✅ New window opened successfully');\n                }
+                console.log('🚀 Launching with URL:', url);
+                console.log('📊 Current params:', this.currentParams);
+                console.log('🔧 URL length:', url.length);
+                
+                // Try both window.open and direct navigation for testing
+                const newWindow = window.open(url, '_blank');
+                if (!newWindow) {
+                    console.log('⚠️ Popup blocked! Trying same window...');
+                    window.location.href = url;
+                } else {
+                    console.log('✅ New window opened successfully');
+                }
             }
             
             // BATCH GENERATION & EXPORT
