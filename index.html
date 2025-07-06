@@ -376,13 +376,25 @@
                     'KLEIN BOTTLE', 'FRACTAL', 'WAVE', 'CRYSTAL'
                 ];
                 
-                const baseGeometry = Math.floor(variant % 8);
-                const variationLevel = Math.floor(variant / 8); // 0, 1, 2, 3 (for sub-variations)
+                // SEQUENTIAL: 0-3 Tetrahedron, 4-7 Hypercube, etc.
+                const geometryMap = [
+                    0, 0, 0, 0,  // 0-3: TETRAHEDRON variations
+                    1, 1, 1, 1,  // 4-7: HYPERCUBE variations
+                    2, 2, 2, 2,  // 8-11: SPHERE variations
+                    3, 3, 3, 3,  // 12-15: TORUS variations
+                    4, 4, 4, 4,  // 16-19: KLEIN BOTTLE variations
+                    5, 5, 5,     // 20-22: FRACTAL variations
+                    6, 6, 6,     // 23-25: WAVE variations
+                    7, 7, 7, 7   // 26-29: CRYSTAL variations
+                ];
+                
+                const baseGeometry = geometryMap[variant] || 0;
+                const variationLevel = variant % 4; // Which variation of that geometry
                 const geometryName = vib3Geometries[baseGeometry];
                 
                 // Variation suffixes for sub-types
-                const suffixes = ['', ' FIELD', ' MATRIX', ' LATTICE'];
-                const finalName = geometryName + (suffixes[variationLevel] || '');
+                const suffixes = [' LATTICE', ' FIELD', ' MATRIX', ' RESONANCE'];
+                const finalName = geometryName + suffixes[variationLevel];
                 
                 // Base parameters for each geometry type
                 const geometryConfigs = {
@@ -390,7 +402,7 @@
                         density: 0.8 + variationLevel * 0.2,
                         speed: 0.3 + variationLevel * 0.1,
                         chaos: variationLevel * 0.1,
-                        morph: 0.0
+                        morph: 0.0 + variationLevel * 0.2
                     },
                     1: { // HYPERCUBE  
                         density: 1.0 + variationLevel * 0.3,
@@ -944,14 +956,24 @@
                 this.frequencyData = null;
                 this.audioData = { bass: 0, mid: 0, high: 0 };
                 
-                // Variant names for display
+                // Variant names for display - SEQUENTIAL ORDER
                 this.variantNames = [
-                    'HYPERCUBE LATTICE', 'PLASMA FIELD', 'CRYSTAL MATRIX', 'NEURAL NETWORK', 'QUANTUM FOAM',
-                    'FRACTAL DIMENSION', 'HOLOGRAPHIC CORE', 'ENERGY VORTEX', 'PARTICLE STORM', 'WAVE FUNCTION',
-                    'TESSELLATION GRID', 'COSMIC WEB', 'DIGITAL RAIN', 'PHOTON STREAM', 'REALITY MESH',
-                    'SPACETIME FABRIC', 'QUANTUM TUNNEL', 'STELLAR NURSERY', 'GRAVITATIONAL LENS', 'DARK MATTER',
-                    'TEMPORAL FLUX', 'DIMENSIONAL RIFT', 'EXOTIC MATTER', 'VACUUM DECAY', 'FIELD EQUATIONS',
-                    'HIGGS FIELD', 'STRING THEORY', 'MULTIVERSE', 'CONSCIOUSNESS', 'EMERGENCE'
+                    // 0-3: TETRAHEDRON variations
+                    'TETRAHEDRON LATTICE', 'TETRAHEDRON FIELD', 'TETRAHEDRON MATRIX', 'TETRAHEDRON RESONANCE',
+                    // 4-7: HYPERCUBE variations
+                    'HYPERCUBE LATTICE', 'HYPERCUBE FIELD', 'HYPERCUBE MATRIX', 'HYPERCUBE QUANTUM',
+                    // 8-11: SPHERE variations
+                    'SPHERE LATTICE', 'SPHERE FIELD', 'SPHERE MATRIX', 'SPHERE RESONANCE',
+                    // 12-15: TORUS variations
+                    'TORUS LATTICE', 'TORUS FIELD', 'TORUS MATRIX', 'TORUS QUANTUM',
+                    // 16-19: KLEIN BOTTLE variations
+                    'KLEIN BOTTLE LATTICE', 'KLEIN BOTTLE FIELD', 'KLEIN BOTTLE MATRIX', 'KLEIN BOTTLE QUANTUM',
+                    // 20-22: FRACTAL variations
+                    'FRACTAL LATTICE', 'FRACTAL FIELD', 'FRACTAL QUANTUM',
+                    // 23-25: WAVE variations
+                    'WAVE LATTICE', 'WAVE FIELD', 'WAVE QUANTUM',
+                    // 26-29: CRYSTAL variations
+                    'CRYSTAL LATTICE', 'CRYSTAL FIELD', 'CRYSTAL MATRIX', 'CRYSTAL QUANTUM'
                 ];
                 
                 this.initialize();
