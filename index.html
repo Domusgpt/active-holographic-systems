@@ -81,6 +81,42 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+        /* PARAMETER DISPLAY */
+        .param-display {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: #0ff;
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+        
+        .param-display.active {
+            display: block;
+        }
+        
+        .param-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            min-width: 200px;
+        }
+        
+        .param-label {
+            color: rgba(0, 255, 255, 0.7);
+        }
+        
+        .param-value {
+            color: #fff;
+            font-weight: bold;
+        }
+        
         .variant-display {
             text-align: center;
             margin-bottom: 15px;
@@ -263,6 +299,34 @@
             <button class="control-btn" onclick="toggleAudio()" id="audioBtn" style="background: rgba(255,0,77,0.3); border-color: #ff004d; color: #ff004d;">🎵 AUDIO</button>
         </div>
         <div class="auto-cycle" id="autoCycleStatus">Auto-cycle: OFF</div>
+    </div>
+    
+    <!-- PARAMETER DISPLAY -->
+    <div class="param-display" id="paramDisplay">
+        <div class="param-row">
+            <span class="param-label">Geometry:</span>
+            <span class="param-value" id="paramGeometry">HYPERCUBE</span>
+        </div>
+        <div class="param-row">
+            <span class="param-label">Density:</span>
+            <span class="param-value" id="paramDensity">1.0</span>
+        </div>
+        <div class="param-row">
+            <span class="param-label">Speed:</span>
+            <span class="param-value" id="paramSpeed">0.5</span>
+        </div>
+        <div class="param-row">
+            <span class="param-label">Chaos:</span>
+            <span class="param-value" id="paramChaos">0.0</span>
+        </div>
+        <div class="param-row">
+            <span class="param-label">Morph:</span>
+            <span class="param-value" id="paramMorph">0.0</span>
+        </div>
+        <div class="param-row">
+            <span class="param-label">Hue:</span>
+            <span class="param-value" id="paramHue">0°</span>
+        </div>
     </div>
     
     <!-- SINGLE HOLOGRAPHIC DISPLAY -->
@@ -987,7 +1051,7 @@
             
             loadSavedVariations() {
                 try {
-                    const saved = sessionStorage.getItem('customHolographicVariations');
+                    const saved = localStorage.getItem('customHolographicVariations');
                     if (saved) {
                         const data = JSON.parse(saved);
                         this.customVariants = data.variations || [];
@@ -998,7 +1062,7 @@
                             this.variantNames[cv.id] = cv.name;
                         });
                         
-                        console.log(`📾 Loaded ${this.customVariants.length} saved custom variations`);
+                        console.log(`💾 Loaded ${this.customVariants.length} saved custom variations from persistent storage`);
                     }
                 } catch (e) {
                     console.error('Failed to load saved variations:', e);
@@ -1007,10 +1071,11 @@
             
             saveVariations() {
                 try {
-                    sessionStorage.setItem('customHolographicVariations', JSON.stringify({
+                    localStorage.setItem('customHolographicVariations', JSON.stringify({
                         variations: this.customVariants,
                         timestamp: Date.now()
                     }));
+                    console.log(`💾 Saved ${this.customVariants.length} custom variations to persistent storage`);
                 } catch (e) {
                     console.error('Failed to save variations:', e);
                 }
@@ -1125,6 +1190,28 @@
                     (this.customVariants[this.currentVariant - this.baseVariants]?.name || 'CUSTOM') : 
                     (this.visualizers[0]?.variantParams?.name || this.variantNames[this.currentVariant]);
                 variantName.textContent = geometryName;
+                
+                // Update parameter display
+                this.updateParameterDisplay();
+            }
+            
+            updateParameterDisplay() {
+                const vp = this.visualizers[2]?.variantParams; // Get from content layer
+                if (!vp) return;
+                
+                // Update parameter values regardless of variation type
+                document.getElementById('paramGeometry').textContent = this.getGeometryName(vp.geometry);
+                document.getElementById('paramDensity').textContent = vp.density.toFixed(2);
+                document.getElementById('paramSpeed').textContent = vp.speed.toFixed(2);
+                document.getElementById('paramChaos').textContent = vp.chaos.toFixed(2);
+                document.getElementById('paramMorph').textContent = vp.morph.toFixed(2);
+                document.getElementById('paramHue').textContent = Math.round(vp.hue) + '°';
+                
+                // Show parameter display for custom variations by default
+                const paramDisplay = document.getElementById('paramDisplay');
+                if (this.isCustomVariation && !this.hideParams) {
+                    paramDisplay.classList.add('active');
+                }
             }
             
             nextVariant() {
@@ -1509,6 +1596,24 @@
                     midResponse: parseFloat(customParams.midResponse) || 1.0,
                     highResponse: parseFloat(customParams.highResponse) || 1.0
                 };
+                
+                // Check if this exact variation already exists
+                const existingIndex = this.customVariants.findIndex(cv => 
+                    cv.params.geometry === params.geometry &&
+                    cv.params.density === params.density &&
+                    cv.params.speed === params.speed &&
+                    cv.params.chaos === params.chaos &&
+                    cv.params.morph === params.morph &&
+                    Math.abs(cv.params.hue - params.hue) < 0.01
+                );
+                
+                if (existingIndex !== -1) {
+                    // Variation already exists, just switch to it
+                    const existingId = this.customVariants[existingIndex].id;
+                    console.log(`♻️ Variation already exists at #${existingId}, switching to it`);
+                    this.updateVariant(existingId);
+                    return;
+                }
                 
                 // Add as a new variation if under the limit
                 if (this.totalVariants < this.maxVariants) {
