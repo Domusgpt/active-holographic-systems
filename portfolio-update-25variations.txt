@@ -1,0 +1,153 @@
+// ADD TO portfolio.html holographicVariants array:
+            {
+                id: 30, name: "TETRAHEDRON DENSITY 1",
+                tags: ["geometric", "calm", "bass-heavy"],
+                complexity: 1, density: 0.5, speed: 0.3, chaos: 0.1, morph: 0.0,
+                description: "Density-focused tetrahedron variation"
+            },
+            {
+                id: 31, name: "TETRAHEDRON DENSITY 2",
+                tags: ["geometric", "calm", "bass-heavy"],
+                complexity: 1, density: 0.8, speed: 0.3, chaos: 0.1, morph: 0.0,
+                description: "Density-focused tetrahedron variation"
+            },
+            {
+                id: 32, name: "TETRAHEDRON DENSITY 3",
+                tags: ["geometric", "calm", "bass-heavy"],
+                complexity: 2, density: 1.2, speed: 0.3, chaos: 0.1, morph: 0.0,
+                description: "Density-focused tetrahedron variation"
+            },
+            {
+                id: 33, name: "TETRAHEDRON DENSITY 4",
+                tags: ["geometric", "intense", "bass-heavy"],
+                complexity: 3, density: 1.8, speed: 0.3, chaos: 0.1, morph: 0.0,
+                description: "Density-focused tetrahedron variation"
+            },
+            {
+                id: 34, name: "TETRAHEDRON DENSITY 5",
+                tags: ["geometric", "intense", "bass-heavy"],
+                complexity: 5, density: 2.5, speed: 0.3, chaos: 0.1, morph: 0.0,
+                description: "Density-focused tetrahedron variation"
+            },
+            {
+                id: 35, name: "HYPERCUBE SPEED 1",
+                tags: ["geometric", "calm", "full-spectrum"],
+                complexity: 0, density: 1.0, speed: 0.2, chaos: 0.15, morph: 0.2,
+                description: "Speed-focused hypercube variation"
+            },
+            {
+                id: 36, name: "HYPERCUBE SPEED 2",
+                tags: ["geometric", "calm", "full-spectrum"],
+                complexity: 1, density: 1.0, speed: 0.5, chaos: 0.15, morph: 0.2,
+                description: "Speed-focused hypercube variation"
+            },
+            {
+                id: 37, name: "HYPERCUBE SPEED 3",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 3, density: 1.0, speed: 1.0, chaos: 0.15, morph: 0.2,
+                description: "Speed-focused hypercube variation"
+            },
+            {
+                id: 38, name: "HYPERCUBE SPEED 4",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 4, density: 1.0, speed: 1.5, chaos: 0.15, morph: 0.2,
+                description: "Speed-focused hypercube variation"
+            },
+            {
+                id: 39, name: "HYPERCUBE SPEED 5",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 5, density: 1.0, speed: 2.0, chaos: 0.15, morph: 0.2,
+                description: "Speed-focused hypercube variation"
+            },
+            {
+                id: 40, name: "SPHERE CHAOS 1",
+                tags: ["organic", "calm", "full-spectrum"],
+                complexity: 2, density: 1.2, speed: 0.4, chaos: 0.0, morph: 0.3,
+                description: "Chaos-focused sphere variation"
+            },
+            {
+                id: 41, name: "SPHERE CHAOS 2",
+                tags: ["organic", "calm", "full-spectrum"],
+                complexity: 3, density: 1.2, speed: 0.4, chaos: 0.25, morph: 0.3,
+                description: "Chaos-focused sphere variation"
+            },
+            {
+                id: 42, name: "SPHERE CHAOS 3",
+                tags: ["organic", "intense", "full-spectrum"],
+                complexity: 4, density: 1.2, speed: 0.4, chaos: 0.5, morph: 0.3,
+                description: "Chaos-focused sphere variation"
+            },
+            {
+                id: 43, name: "SPHERE CHAOS 4",
+                tags: ["organic", "intense", "full-spectrum"],
+                complexity: 5, density: 1.2, speed: 0.4, chaos: 0.75, morph: 0.3,
+                description: "Chaos-focused sphere variation"
+            },
+            {
+                id: 44, name: "SPHERE CHAOS 5",
+                tags: ["organic", "intense", "full-spectrum"],
+                complexity: 5, density: 1.2, speed: 0.4, chaos: 1.0, morph: 0.3,
+                description: "Chaos-focused sphere variation"
+            },
+            {
+                id: 45, name: "TORUS HUE 60°",
+                tags: ["organic", "calm", "bass-heavy"],
+                complexity: 3, density: 0.9, speed: 0.6, chaos: 0.2, morph: 0.5,
+                description: "Color-shifted torus variation at 60°"
+            },
+            {
+                id: 46, name: "TORUS HUE 120°",
+                tags: ["organic", "calm", "bass-heavy"],
+                complexity: 3, density: 0.9, speed: 0.6, chaos: 0.2, morph: 0.5,
+                description: "Color-shifted torus variation at 120°"
+            },
+            {
+                id: 47, name: "TORUS HUE 180°",
+                tags: ["organic", "calm", "bass-heavy"],
+                complexity: 3, density: 0.9, speed: 0.6, chaos: 0.2, morph: 0.5,
+                description: "Color-shifted torus variation at 180°"
+            },
+            {
+                id: 48, name: "TORUS HUE 240°",
+                tags: ["organic", "calm", "bass-heavy"],
+                complexity: 3, density: 0.9, speed: 0.6, chaos: 0.2, morph: 0.5,
+                description: "Color-shifted torus variation at 240°"
+            },
+            {
+                id: 49, name: "TORUS HUE 300°",
+                tags: ["organic", "calm", "bass-heavy"],
+                complexity: 3, density: 0.9, speed: 0.6, chaos: 0.2, morph: 0.5,
+                description: "Color-shifted torus variation at 300°"
+            },
+            {
+                id: 50, name: "CRYSTAL EXPERIMENTAL 1",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 4, density: 1.5, speed: 0.7, chaos: 0.09, morph: 0.87,
+                description: "Experimental crystal variation"
+            },
+            {
+                id: 51, name: "HYPERCUBE EXPERIMENTAL 2",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 3, density: 1.0, speed: 0.6, chaos: 0.37, morph: 0.83,
+                description: "Experimental hypercube variation"
+            },
+            {
+                id: 52, name: "TORUS EXPERIMENTAL 3",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 5, density: 1.1, speed: 0.3, chaos: 0.67, morph: 0.27,
+                description: "Experimental torus variation"
+            },
+            {
+                id: 53, name: "CRYSTAL EXPERIMENTAL 4",
+                tags: ["geometric", "intense", "full-spectrum"],
+                complexity: 3, density: 2.1, speed: 0.7, chaos: 0.26, morph: 0.13,
+                description: "Experimental crystal variation"
+            },
+            {
+                id: 54, name: "WAVE EXPERIMENTAL 5",
+                tags: ["organic", "intense", "full-spectrum"],
+                complexity: 5, density: 2.2, speed: 1.3, chaos: 0.38, morph: 0.53,
+                description: "Experimental wave variation"
+            },
+
+// Total: 25 new variations to add after ID 29

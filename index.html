@@ -1405,7 +1405,7 @@
                 };
                 
                 render();
-                console.log('🎬 Holographic cycling render loop started');
+                console.log('🎬 Holographic cycling render loop started');\n            }\n            \n            loadCustomVariation(customParams) {\n                console.log('🎛️ Loading custom variation with parameters:', customParams);\n                \n                // Convert string parameters to appropriate types\n                const params = {\n                    geometry: parseInt(customParams.geometry) || 0,\n                    density: parseFloat(customParams.density) || 1.0,\n                    speed: parseFloat(customParams.speed) || 0.5,\n                    chaos: parseFloat(customParams.chaos) || 0.0,\n                    morph: parseFloat(customParams.morph) || 0.0,\n                    hue: parseFloat(customParams.hue) || 0,\n                    saturation: parseFloat(customParams.saturation) || 0.8,\n                    intensity: parseFloat(customParams.intensity) || 0.5,\n                    bassResponse: parseFloat(customParams.bassResponse) || 1.0,\n                    midResponse: parseFloat(customParams.midResponse) || 1.0,\n                    highResponse: parseFloat(customParams.highResponse) || 1.0\n                };\n                \n                // Override current variant to 31 (custom)\n                this.currentVariant = 31;\n                \n                // Update all visualizers with custom parameters\n                this.visualizers.forEach(visualizer => {\n                    visualizer.variant = this.currentVariant;\n                    \n                    // Create custom variant parameters based on parametric engine settings\n                    visualizer.variantParams = {\n                        geometry: params.geometry,\n                        density: params.density,\n                        speed: params.speed,\n                        chaos: params.chaos,\n                        morphing: params.morph,\n                        hue: params.hue,\n                        saturation: params.saturation,\n                        intensity: params.intensity,\n                        name: this.getGeometryName(params.geometry) + ' CUSTOM'\n                    };\n                    \n                    // Apply role-specific parameters\n                    const role = visualizer.role;\n                    const vp = visualizer.variantParams;\n                    \n                    visualizer.roleParams = {\n                        'background': { \n                            densityMult: 0.4, speedMult: 0.2, colorShift: 0.0, intensity: 0.2,\n                            mouseReactivity: 0.3, clickReactivity: 0.1 \n                        },\n                        'shadow': { \n                            densityMult: 0.8, speedMult: 0.3, colorShift: 180.0, intensity: 0.4,\n                            mouseReactivity: 0.5, clickReactivity: 0.3 \n                        },\n                        'content': { \n                            densityMult: vp.density, speedMult: vp.speed, \n                            colorShift: vp.hue, intensity: vp.intensity,\n                            mouseReactivity: 0.8, clickReactivity: 0.6 \n                        },\n                        'accent': { \n                            densityMult: vp.density * 1.2, speedMult: vp.speed * 1.5, \n                            colorShift: vp.hue + 60, intensity: vp.intensity * 1.2,\n                            mouseReactivity: 1.0, clickReactivity: 0.8 \n                        },\n                        'overlay': { \n                            densityMult: vp.density * 0.6, speedMult: vp.speed * 2.0, \n                            colorShift: vp.hue + 120, intensity: vp.intensity * 0.8,\n                            mouseReactivity: 1.2, clickReactivity: 1.0 \n                        }\n                    }[role];\n                    \n                    // Update audio response multipliers\n                    visualizer.audioResponse = {\n                        bass: params.bassResponse,\n                        mid: params.midResponse,\n                        high: params.highResponse\n                    };\n                });\n                \n                this.updateVariantDisplay();\n                console.log('✅ Custom variation loaded successfully');\n            }\n            \n            getGeometryName(geometryId) {\n                const geometryNames = [\n                    'TETRAHEDRON', 'HYPERCUBE', 'SPHERE', 'TORUS',\n                    'KLEIN BOTTLE', 'FRACTAL', 'WAVE', 'CRYSTAL'\n                ];\n                return geometryNames[geometryId] || 'UNKNOWN';
             }
         }
         
@@ -1466,7 +1466,28 @@
             const variantParam = urlParams.get('variant');
             const autoplayParam = urlParams.get('autoplay');
             
-            if (variantParam !== null) {
+            // Check for custom parametric engine parameters
+            const customParams = {
+                geometry: urlParams.get('geometry'),
+                density: urlParams.get('density'),
+                speed: urlParams.get('speed'),
+                chaos: urlParams.get('chaos'),
+                morph: urlParams.get('morph'),
+                hue: urlParams.get('hue'),
+                saturation: urlParams.get('saturation'),
+                intensity: urlParams.get('intensity'),
+                bassResponse: urlParams.get('bassResponse'),
+                midResponse: urlParams.get('midResponse'),
+                highResponse: urlParams.get('highResponse')
+            };
+            
+            // Check if custom parameters are provided
+            const hasCustomParams = Object.values(customParams).some(param => param !== null);
+            
+            if (hasCustomParams) {
+                console.log('🎛️ Loading custom parametric variation...');
+                system.loadCustomVariation(customParams);
+            } else if (variantParam !== null) {
                 const variantId = parseInt(variantParam);
                 if (variantId >= 0 && variantId < system.totalVariants) {
                     system.updateVariant(variantId);
