@@ -1576,11 +1576,16 @@
                 highResponse: urlParams.get('highResponse')
             };
             
+            // Debug logging
+            console.log('🔍 URL params:', window.location.search);
+            console.log('📊 Parsed custom params:', customParams);
+            
             // Check if custom parameters are provided
             const hasCustomParams = Object.values(customParams).some(param => param !== null);
             
             if (hasCustomParams) {
                 console.log('🎛️ Loading custom parametric variation...');
+                console.log('✅ Has custom params:', hasCustomParams);
                 system.loadCustomVariation(customParams);
             } else if (variantParam !== null) {
                 const variantId = parseInt(variantParam);

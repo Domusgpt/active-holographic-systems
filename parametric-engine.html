@@ -894,10 +894,15 @@
                     params.set(key, this.currentParams[key]);
                 });
                 
+                // Debug: Log individual parameters
+                console.log('🎛️ Launching with parameters:');
+                Object.entries(this.currentParams).forEach(([key, value]) => {
+                    console.log(`  ${key}: ${value}`);
+                });
+                
                 const url = `index.html?${params.toString()}&autoplay=true`;
-                console.log('🚀 Launching with URL:', url);
-                console.log('📊 Current params:', this.currentParams);
-                console.log('🔧 URL length:', url.length);
+                console.log('🚀 Full URL:', url);
+                console.log('🔗 Param string:', params.toString());
                 
                 // Try both window.open and direct navigation for testing
                 const newWindow = window.open(url, '_blank');
