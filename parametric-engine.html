@@ -895,7 +895,7 @@
                 });
                 
                 const url = `index.html?${params.toString()}&autoplay=true`;
-                window.open(url, '_blank');
+                console.log('🚀 Launching with URL:', url);\n                console.log('📊 Current params:', this.currentParams);\n                console.log('🔧 URL length:', url.length);\n                \n                // Try both window.open and direct navigation for testing\n                const newWindow = window.open(url, '_blank');\n                if (!newWindow) {\n                    console.log('⚠️ Popup blocked! Trying same window...');\n                    window.location.href = url;\n                } else {\n                    console.log('✅ New window opened successfully');\n                }
             }
             
             // BATCH GENERATION & EXPORT
