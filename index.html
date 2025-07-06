@@ -990,6 +990,7 @@
                 if (newVariant >= this.totalVariants) newVariant = 0;
                 
                 this.currentVariant = newVariant;
+                this.isCustomVariation = false; // Reset custom variation flag
                 
                 // Update all visualizers with new variant parameters
                 this.visualizers.forEach(visualizer => {
@@ -1039,7 +1040,8 @@
                 variantNumber.textContent = String(this.currentVariant + 1).padStart(2, '0');
                 
                 // Get the geometry name from the variant parameters
-                const geometryName = this.visualizers[0]?.variantParams?.name || this.variantNames[this.currentVariant];
+                const geometryName = this.isCustomVariation ? this.customVariationName : 
+                    (this.visualizers[0]?.variantParams?.name || this.variantNames[this.currentVariant]);
                 variantName.textContent = geometryName;
             }
             
@@ -1427,7 +1429,9 @@
                 };
                 
                 // Override current variant to 31 (custom)
-                this.currentVariant = 31;
+                this.currentVariant = 0; // Use valid variant number
+                this.isCustomVariation = true; // Flag to indicate custom mode
+                this.customVariationName = this.getGeometryName(params.geometry) + ' CUSTOM';
                 
                 // Update all visualizers with custom parameters
                 this.visualizers.forEach(visualizer => {
