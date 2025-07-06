@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALTERNATE ACCENT LAYER VERSION - Active Holographic Systems</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #0ff;
+            font-family: monospace;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .version {
+            border: 1px solid #0ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+        }
+        pre {
+            background: rgba(0,255,255,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .launch-btn {
+            display: inline-block;
+            background: rgba(0,255,255,0.2);
+            border: 1px solid #0ff;
+            color: #0ff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .launch-btn:hover {
+            background: rgba(0,255,255,0.4);
+            box-shadow: 0 0 20px #0ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 ACCENT LAYER COMPARISON</h1>
+    
+    <div class="comparison">
+        <div class="version">
+            <h2>YOUR ORIGINAL VISION</h2>
+            <p>Fast-moving, more visible accent layer</p>
+            <pre>
+'accent': { 
+    densityMult: vp.density * 0.6,      // Lower density
+    speedMult: vp.speed * 2.0,          // FAST movement
+    colorShift: vp.hue + 120,           // Different hue
+    intensity: vp.intensity * 0.8,      // More visible
+    mouseReactivity: 1.2,
+    clickReactivity: 1.0 
+}
+            </pre>
+            <p><strong>Effect:</strong> Dynamic, fast-moving overlay that adds energy and movement</p>
+            <a href="index.html?variant=0" class="launch-btn">LAUNCH ORIGINAL</a>
+        </div>
+        
+        <div class="version">
+            <h2>MY ALTERNATE INTERPRETATION</h2>
+            <p>Slow-drifting, subtle holographic film</p>
+            <pre>
+'accent': { 
+    densityMult: 2.5 + (vp.density * 0.5),  // HIGH density grid
+    speedMult: 0.4 + (vp.speed * 0.1),      // SLOW drift
+    colorShift: vp.hue + 300.0,             // Complementary hue
+    intensity: 0.3 + (vp.intensity * 0.1),  // MOSTLY transparent
+    mouseReactivity: 1.5,
+    clickReactivity: 1.2 
+}
+            </pre>
+            <p><strong>Effect:</strong> Subtle holographic sheen, like security film on credit cards</p>
+            <a href="#" onclick="alert('Would need to create alternate version file'); return false;" class="launch-btn">LAUNCH ALTERNATE</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <h3>The Real Bug Was:</h3>
+        <p>Missing fallback in the custom variation loader - NOT the accent layer parameters!</p>
+        <p>Your original accent layer settings are now preserved in the main index.html</p>
+        <a href="index.html" class="launch-btn">↩ BACK TO MAIN DEMO</a>
+        <a href="parametric-engine.html" class="launch-btn">🎛️ PARAMETRIC ENGINE</a>
+    </div>
+</body>
+</html>

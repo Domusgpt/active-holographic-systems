@@ -1468,17 +1468,20 @@
                             colorShift: vp.hue, intensity: vp.intensity,
                             mouseReactivity: 0.8, clickReactivity: 0.6 
                         },
-                        'accent': { 
+                        'highlight': { 
                             densityMult: vp.density * 1.2, speedMult: vp.speed * 1.5, 
                             colorShift: vp.hue + 60, intensity: vp.intensity * 1.2,
                             mouseReactivity: 1.0, clickReactivity: 0.8 
                         },
-                        'overlay': { 
+                        'accent': { 
                             densityMult: vp.density * 0.6, speedMult: vp.speed * 2.0, 
                             colorShift: vp.hue + 120, intensity: vp.intensity * 0.8,
                             mouseReactivity: 1.2, clickReactivity: 1.0 
                         }
-                    }[role];
+                    }[role] || { 
+                        densityMult: 1.0, speedMult: 0.5, colorShift: 0.0, intensity: 0.5, 
+                        mouseReactivity: 1.0, clickReactivity: 0.5 
+                    };
                     
                     // Update audio response multipliers
                     visualizer.audioResponse = {
