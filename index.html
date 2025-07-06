@@ -1461,6 +1461,26 @@
             const system = new HolographicCyclingSystem();
             window.holographicSystem = system;
             
+            // Check for URL parameters (for portfolio integration)
+            const urlParams = new URLSearchParams(window.location.search);
+            const variantParam = urlParams.get('variant');
+            const autoplayParam = urlParams.get('autoplay');
+            
+            if (variantParam !== null) {
+                const variantId = parseInt(variantParam);
+                if (variantId >= 0 && variantId < system.totalVariants) {
+                    system.updateVariant(variantId);
+                    console.log(`🎯 Launched with variant ${variantId + 1}`);
+                }
+            }
+            
+            if (autoplayParam === 'true') {
+                // Auto-enable audio for portfolio launches
+                setTimeout(() => {
+                    system.toggleAudio();
+                }, 1000);
+            }
+            
             // Add explicit button event listeners for mobile compatibility
             console.log('📱 Setting up mobile button handlers...');
             

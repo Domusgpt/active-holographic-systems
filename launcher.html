@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Holographic Systems - Launcher</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #1a0033 0%, #000000 70%);
+        }
+        
+        .launcher {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #00ffff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.3); }
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .launch-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .launch-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .launch-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #00ffff;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        
+        .launch-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .launch-title {
+            color: #00ffff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .launch-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .launch-features {
+            list-style: none;
+            text-align: left;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .launch-features li {
+            margin-bottom: 5px;
+        }
+        
+        .launch-features li:before {
+            content: "▶ ";
+            color: #00ffff;
+            margin-right: 5px;
+        }
+        
+        .info-section {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .info-title {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .info-content {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .launch-options { 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+            }
+            .launcher { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="launcher">
+        <h1>🌌 ACTIVE HOLOGRAPHIC SYSTEMS</h1>
+        <p class="subtitle">
+            30-Variation Multilateral Polytonal Geometry Visualizer<br>
+            with Real-Time Audio Reactivity
+        </p>
+        
+        <div class="launch-options">
+            <a href="index.html" class="launch-card">
+                <div class="launch-icon">🎮</div>
+                <div class="launch-title">LIVE DEMO</div>
+                <div class="launch-description">
+                    Experience the full holographic system with real-time audio reactivity and interactive controls.
+                </div>
+                <ul class="launch-features">
+                    <li>30 geometric variations</li>
+                    <li>Real-time audio analysis</li>
+                    <li>4D mathematics visualization</li>
+                    <li>Mobile-optimized controls</li>
+                    <li>Auto-cycling variations</li>
+                </ul>
+            </a>
+            
+            <a href="portfolio.html" class="launch-card">
+                <div class="launch-icon">🎨</div>
+                <div class="launch-title">PORTFOLIO BROWSER</div>
+                <div class="launch-description">
+                    Browse, search, and preview all variations in an organized catalog interface.
+                </div>
+                <ul class="launch-features">
+                    <li>Visual thumbnail grid</li>
+                    <li>Tag-based filtering</li>
+                    <li>Search functionality</li>
+                    <li>Complexity ratings</li>
+                    <li>Parameter details</li>
+                </ul>
+            </a>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-title">🎯 How to Use</div>
+            <div class="info-content">
+                <strong>Live Demo:</strong> Direct experience with audio reactivity - click "🎵 AUDIO" to enable microphone access and watch the geometries respond to sound.<br><br>
+                <strong>Portfolio Browser:</strong> Systematic exploration - browse all 30 variations with thumbnails, search by name or tags, and click any variation to launch it full-screen.
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-title">🔧 Development Framework</div>
+            <div class="info-content">
+                This system is designed for systematic expansion from 30 to 1000+ variations through parametric exploration, evolutionary algorithms, and extended geometry libraries. See <strong>EXPANSION_FRAMEWORK.md</strong> for the complete roadmap.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
