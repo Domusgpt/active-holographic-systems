@@ -1005,7 +1005,7 @@
                 this.gl.uniform1f(this.uniforms.mouseIntensity, this.mouseIntensity);
                 this.gl.uniform1f(this.uniforms.clickIntensity, this.clickIntensity);
                 this.gl.uniform1f(this.uniforms.densityVariation, this.densityVariation);
-                this.gl.uniform1f(this.uniforms.geometryType, this.variant || 0);
+                this.gl.uniform1f(this.uniforms.geometryType, this.variantParams.geometryType !== undefined ? this.variantParams.geometryType : this.variant || 0);
                 this.gl.uniform1f(this.uniforms.chaos, this.variantParams.chaos || 0.0);
                 this.gl.uniform1f(this.uniforms.morph, this.variantParams.morph || 0.0);
                 
@@ -1226,7 +1226,7 @@
                 if (!vp) return;
                 
                 // Update parameter values regardless of variation type
-                document.getElementById('paramGeometry').textContent = this.getGeometryName(vp.geometry);
+                document.getElementById('paramGeometry').textContent = this.getGeometryName(vp.geometryType);
                 document.getElementById('paramDensity').textContent = vp.density.toFixed(2);
                 document.getElementById('paramSpeed').textContent = vp.speed.toFixed(2);
                 document.getElementById('paramChaos').textContent = vp.chaos.toFixed(2);
