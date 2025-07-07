@@ -678,9 +678,35 @@
                     
                     // DYNAMIC GEOMETRY SELECTOR - Based on VIB3 8-geometry system
                     float getDynamicGeometry(vec3 p, float gridSize, float geometryType) {
-                        // Create 30 variations from 8 base geometries (3-4 variations each)
-                        int baseGeom = int(mod(geometryType, 8.0));
-                        float variation = floor(geometryType / 8.0) / 4.0; // 0.0, 0.25, 0.5, 0.75
+                        // Map variants to correct geometry groups: 0-3=tetra, 4-7=hypercube, etc.
+                        int baseGeom = 0;
+                        float variation = 0.0;
+                        
+                        if (geometryType < 4.0) {
+                            baseGeom = 0; // TETRAHEDRON
+                            variation = geometryType / 4.0;
+                        } else if (geometryType < 8.0) {
+                            baseGeom = 1; // HYPERCUBE
+                            variation = (geometryType - 4.0) / 4.0;
+                        } else if (geometryType < 12.0) {
+                            baseGeom = 2; // SPHERE
+                            variation = (geometryType - 8.0) / 4.0;
+                        } else if (geometryType < 16.0) {
+                            baseGeom = 3; // TORUS
+                            variation = (geometryType - 12.0) / 4.0;
+                        } else if (geometryType < 20.0) {
+                            baseGeom = 4; // KLEIN BOTTLE
+                            variation = (geometryType - 16.0) / 4.0;
+                        } else if (geometryType < 23.0) {
+                            baseGeom = 5; // FRACTAL
+                            variation = (geometryType - 20.0) / 3.0;
+                        } else if (geometryType < 26.0) {
+                            baseGeom = 6; // WAVE  
+                            variation = (geometryType - 23.0) / 3.0;
+                        } else {
+                            baseGeom = 7; // CRYSTAL
+                            variation = (geometryType - 26.0) / 4.0;
+                        }
                         
                         // Apply variation to grid size
                         float variedGridSize = gridSize * (0.5 + variation * 1.5);
