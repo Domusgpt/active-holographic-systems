@@ -1226,12 +1226,12 @@
                 if (!vp) return;
                 
                 // Update parameter values regardless of variation type
-                document.getElementById('paramGeometry').textContent = this.getGeometryName(vp.geometryType);
-                document.getElementById('paramDensity').textContent = vp.density.toFixed(2);
-                document.getElementById('paramSpeed').textContent = vp.speed.toFixed(2);
-                document.getElementById('paramChaos').textContent = vp.chaos.toFixed(2);
-                document.getElementById('paramMorph').textContent = vp.morph.toFixed(2);
-                document.getElementById('paramHue').textContent = Math.round(vp.hue) + '°';
+                document.getElementById('paramGeometry').textContent = this.getGeometryName(vp.geometryType || 0);
+                document.getElementById('paramDensity').textContent = (vp.density || 0).toFixed(2);
+                document.getElementById('paramSpeed').textContent = (vp.speed || 0).toFixed(2);
+                document.getElementById('paramChaos').textContent = (vp.chaos || 0).toFixed(2);
+                document.getElementById('paramMorph').textContent = (vp.morph || 0).toFixed(2);
+                document.getElementById('paramHue').textContent = Math.round(vp.hue || 0) + '°';
                 
                 // Show parameter display for custom variations by default
                 const paramDisplay = document.getElementById('paramDisplay');
