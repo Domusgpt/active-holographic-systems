@@ -967,7 +967,7 @@
                 this.gl.uniform2f(this.uniforms.resolution, this.canvas.width, this.canvas.height);
                 this.gl.uniform1f(this.uniforms.time, time);
                 this.gl.uniform2f(this.uniforms.mouse, this.mouseX, this.mouseY);
-                this.gl.uniform1f(this.uniforms.geometry, this.variantParams.geometry || 0);
+                this.gl.uniform1f(this.uniforms.geometry, this.variantParams.geometryType || 0);
                 this.gl.uniform1f(this.uniforms.density, this.variantParams.density || 1.0);
                 this.gl.uniform1f(this.uniforms.speed, 0.3 + (this.audioSpeedBoost || 0.0));
                 this.gl.uniform3fv(this.uniforms.color, new Float32Array([0.0, 1.0, 1.0]));
@@ -979,7 +979,7 @@
                 this.gl.uniform1f(this.uniforms.mouseIntensity, this.mouseIntensity);
                 this.gl.uniform1f(this.uniforms.clickIntensity, this.clickIntensity);
                 this.gl.uniform1f(this.uniforms.densityVariation, this.densityVariation);
-                this.gl.uniform1f(this.uniforms.geometryType, this.variantParams.geometry || 0);
+                this.gl.uniform1f(this.uniforms.geometryType, this.variantParams.geometryType || 0);
                 this.gl.uniform1f(this.uniforms.chaos, this.variantParams.chaos || 0.0);
                 this.gl.uniform1f(this.uniforms.morph, this.variantParams.morph || 0.0);
                 
@@ -1128,7 +1128,7 @@
                         const customData = this.customVariants[customIndex];
                         if (customData) {
                             visualizer.variantParams = {
-                                geometry: customData.params.geometry,
+                                geometryType: customData.params.geometry,
                                 density: customData.params.density,
                                 speed: customData.params.speed,
                                 chaos: customData.params.chaos,
@@ -1647,7 +1647,7 @@
                     
                     // Create custom variant parameters based on parametric engine settings
                     visualizer.variantParams = {
-                        geometry: params.geometry,
+                        geometryType: params.geometry,
                         density: params.density,
                         speed: params.speed,
                         chaos: params.chaos,
