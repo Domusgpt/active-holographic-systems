@@ -1873,10 +1873,8 @@
                     }
                 };
                 
-                // Add multiple event types for maximum compatibility
+                // Add single event listener to prevent multiple calls
                 button.addEventListener('click', handleButtonPress, false);
-                button.addEventListener('touchend', handleButtonPress, false);
-                button.addEventListener('pointerup', handleButtonPress, false);
             });
             
             console.log('✅ Mobile button handlers setup complete');
