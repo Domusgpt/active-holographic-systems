@@ -1001,6 +1001,21 @@
                 this.gl.uniform2f(this.uniforms.resolution, this.canvas.width, this.canvas.height);
                 this.gl.uniform1f(this.uniforms.time, time);
                 this.gl.uniform2f(this.uniforms.mouse, this.mouseX, this.mouseY);
+                // Log shader uniforms for debugging
+                const shaderDebug = {
+                    geometry: this.variantParams.geometryType || 0,
+                    geometryType: this.variantParams.geometryType !== undefined ? this.variantParams.geometryType : this.variant || 0,
+                    density: this.variantParams.density || 1.0,
+                    chaos: this.variantParams.chaos || 0.0,
+                    morph: this.variantParams.morph || 0.0,
+                    role: this.role,
+                    variant: this.variant
+                };
+                
+                if (this.role === 'content') { // Only log once per frame
+                    console.log(`🎯 Shader uniforms for variant ${this.variant}:`, shaderDebug);
+                }
+                
                 this.gl.uniform1f(this.uniforms.geometry, this.variantParams.geometryType || 0);
                 this.gl.uniform1f(this.uniforms.density, this.variantParams.density || 1.0);
                 this.gl.uniform1f(this.uniforms.speed, 0.3 + (this.audioSpeedBoost || 0.0));
@@ -1164,6 +1179,7 @@
                     if (this.isCustomVariation) {
                         const customIndex = this.currentVariant - this.baseVariants;
                         const customData = this.customVariants[customIndex];
+                        console.log(`🎨 Custom Variant ${this.currentVariant} (index ${customIndex}):`, customData);
                         if (customData) {
                             visualizer.variantParams = {
                                 geometryType: customData.params.geometry,
@@ -1176,9 +1192,13 @@
                                 intensity: customData.params.intensity,
                                 name: customData.name
                             };
+                            console.log(`✅ Applied custom params:`, visualizer.variantParams);
+                        } else {
+                            console.warn(`❌ Custom data not found for variant ${this.currentVariant}`);
                         }
                     } else {
                         visualizer.variantParams = visualizer.generateVariantParams(this.currentVariant);
+                        console.log(`🎲 Base Variant ${this.currentVariant} params:`, visualizer.variantParams);
                     }
                     
                     // Completely regenerate role parameters with new variant values
