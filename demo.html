@@ -1219,10 +1219,9 @@
                 
                 variantNumber.textContent = String(this.currentVariant + 1).padStart(2, '0');
                 
-                // Get the geometry name from the variant parameters
-                const geometryName = this.isCustomVariation ? 
-                    (this.customVariants[this.currentVariant - this.baseVariants]?.name || 'CUSTOM') : 
-                    (this.visualizers[0]?.variantParams?.name || this.variantNames[this.currentVariant]);
+                // Get the geometry name from the actual variant parameters
+                const vp = this.visualizers[2]?.variantParams; // Use content layer params
+                const geometryName = vp?.name || this.variantNames[this.currentVariant] || 'UNKNOWN';
                 variantName.textContent = geometryName;
                 
                 // Update parameter display
