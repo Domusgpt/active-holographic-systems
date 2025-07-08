@@ -290,13 +290,13 @@
             <div id="variantName">HYPERCUBE LATTICE</div>
         </div>
         <div class="control-buttons">
-            <button class="control-btn" onclick="previousVariant()">◀ PREV</button>
-            <button class="control-btn" onclick="nextVariant()">NEXT ▶</button>
+            <button class="control-btn">◀ PREV</button>
+            <button class="control-btn">NEXT ▶</button>
         </div>
         <div class="control-buttons">
-            <button class="control-btn" onclick="randomVariant()">🎲 RANDOM</button>
-            <button class="control-btn" onclick="toggleAutoCycle()" id="autoCycleBtn">⏸ AUTO</button>
-            <button class="control-btn" onclick="toggleAudio()" id="audioBtn" style="background: rgba(255,0,77,0.3); border-color: #ff004d; color: #ff004d;">🎵 AUDIO</button>
+            <button class="control-btn">🎲 RANDOM</button>
+            <button class="control-btn" id="autoCycleBtn">⏸ AUTO</button>
+            <button class="control-btn" id="audioBtn" style="background: rgba(255,0,77,0.3); border-color: #ff004d; color: #ff004d;">🎵 AUDIO</button>
         </div>
         <div class="auto-cycle" id="autoCycleStatus">Auto-cycle: OFF</div>
     </div>
@@ -1858,6 +1858,8 @@
                         randomVariant();
                     } else if (buttonText.includes('AUTO')) {
                         toggleAutoCycle();
+                    } else if (buttonText.includes('AUDIO')) {
+                        toggleAudio();
                     }
                 };
                 
