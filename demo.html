@@ -295,7 +295,7 @@
         </div>
         <div class="control-buttons">
             <button class="control-btn">🎲 RANDOM</button>
-            <button class="control-btn" id="autoCycleBtn">⏸ AUTO</button>
+            <button class="control-btn" id="autoCycleBtn">▶ AUTO</button>
             <button class="control-btn" id="audioBtn" style="background: rgba(255,0,77,0.3); border-color: #ff004d; color: #ff004d;">🎵 AUDIO</button>
         </div>
         <div class="auto-cycle" id="autoCycleStatus">Auto-cycle: OFF</div>
@@ -1553,8 +1553,11 @@
                     // Allow normal scrolling behavior for UI controls
                 }, { passive: false });
                 
-                // Keyboard shortcuts
+                // Keyboard shortcuts - only when not focused on a button
                 document.addEventListener('keydown', (e) => {
+                    // Skip if user is focused on a button or input
+                    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
+                    
                     switch(e.key) {
                         case 'ArrowLeft':
                             this.previousVariant();
