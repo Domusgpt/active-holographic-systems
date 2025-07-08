@@ -1097,6 +1097,7 @@
                         });
                         
                         console.log(`💾 Loaded ${this.customVariants.length} saved custom variations from persistent storage`);
+                        console.log(`📊 Total variants: ${this.totalVariants} (${this.baseVariants} base + ${this.customVariants.length} custom)`);
                     }
                 } catch (e) {
                     console.error('Failed to load saved variations:', e);
@@ -1144,9 +1145,12 @@
             }
             
             updateVariant(newVariant) {
+                console.log(`🎯 updateVariant called with: ${newVariant} (current: ${this.currentVariant}, total: ${this.totalVariants})`);
+                
                 if (newVariant < 0) newVariant = this.totalVariants - 1;
                 if (newVariant >= this.totalVariants) newVariant = 0;
                 
+                console.log(`🎯 Setting variant to: ${newVariant}`);
                 this.currentVariant = newVariant;
                 
                 // Check if this is a custom variation
@@ -1248,6 +1252,7 @@
             }
             
             nextVariant() {
+                console.log(`🔄 Next: ${this.currentVariant} → ${this.currentVariant + 1} (total: ${this.totalVariants})`);
                 this.updateVariant(this.currentVariant + 1);
             }
             
